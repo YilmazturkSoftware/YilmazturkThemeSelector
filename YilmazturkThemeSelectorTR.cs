@@ -36,36 +36,41 @@ public static class YilmazturkThemeSelector
     #region Tetikleyici Kod
     public static async void Apply(string theme,Control control)
     {
-        if(theme == "açık")
-        {
-            ApplyLightTheme(control);
-        }
-        else if(theme == "koyu")
-        {
-            ApplyDarkTheme(control);
-        }
-        else if(theme == "sistem")
-        {
-            if(GetWindowsTheme() == "Default")
+        try{
+            if(theme == "açık")
             {
                 ApplyLightTheme(control);
             }
-            else
+            else if(theme == "koyu")
             {
                 ApplyDarkTheme(control);
             }
+            else if(theme == "sistem")
+            {
+                if(GetWindowsTheme() == "Default")
+                {
+                    ApplyLightTheme(control);
+                }
+                else
+                {
+                    ApplyDarkTheme(control);
+                }
+            }
+            else if (theme == "sistemDeğişir")
+            {
+    
+                controls = control;
+                await tema(control);
+    
+    
+            }
+            else
+            {
+                ApplyAnotherTheme(control);
+            }
         }
-        else if (theme == "sistemDeğişir")
-        {
-
-            controls = control;
-            await tema(control);
-
-
-        }
-        else
-        {
-            ApplyAnotherTheme(control);
+        catch{
+            
         }
     }
     #endregion
