@@ -36,36 +36,41 @@ public static class YilmazturkThemeSelector
     #region Trigger Code
     public static async void Apply(string theme,Control control)
     {
-        if(theme == "light")
-        {
-            ApplyLightTheme(control);
-        }
-        else if(theme == "dark")
-        {
-            ApplyDarkTheme(control);
-        }
-        else if(theme == "system")
-        {
-            if(GetWindowsTheme() == "Default")
+        try{
+            if(theme == "light")
             {
                 ApplyLightTheme(control);
             }
-            else
+            else if(theme == "dark")
             {
                 ApplyDarkTheme(control);
             }
+            else if(theme == "system")
+            {
+                if(GetWindowsTheme() == "Default")
+                {
+                    ApplyLightTheme(control);
+                }
+                else
+                {
+                    ApplyDarkTheme(control);
+                }
+            }
+            else if (theme == "systemChange")
+            {
+    
+                controls = control;
+                await tema(control);
+    
+    
+            }
+            else
+            {
+                ApplyAnotherTheme(control);
+            }
         }
-        else if (theme == "systemChange")
-        {
-
-            controls = control;
-            await tema(control);
-
-
-        }
-        else
-        {
-            ApplyAnotherTheme(control);
+        catch{
+            //linux users, windows 7 and older 
         }
     }
     #endregion
